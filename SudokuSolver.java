@@ -15,20 +15,28 @@ import java.lang.IllegalArgumentException;
  */
 class SudokuSolver {
     public static void main(String args[]) throws IOException {
+        String filename;
+        
+        /* parse command line args */
         if (args.length != 1) {
             throw new IllegalArgumentException("Usage: java -jar SudokuSolver filename");
         }
+        filename = args[0];
 
-        try (Reader puzzleFile = new FileReader(args[0]);
-            BufferedReader puzzleReader = new BufferedReader(puzzleFile)) {
-                int input;
+        /* Read puzzle input */
+        try (Reader puzzleFile = new FileReader(filename);
+             BufferedReader puzzleReader = new BufferedReader(puzzleFile)) {
+
+            int input;
+            input = puzzleReader.read();
+            while (input != -1) {
+                if (!Character.isWhitespace((char)input))
+                System.out.println((char)input);
                 input = puzzleReader.read();
-                while (input != -1) {
-                    if (!Character.isWhitespace((char)input))
-                    System.out.println((char)input);
-                    input = puzzleReader.read();
-                }
             }
+            puzzleReader.close();
+            puzzleFile.close();
+        }
         
     }
     
