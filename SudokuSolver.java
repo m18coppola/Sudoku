@@ -55,7 +55,7 @@ class SudokuSolver {
 
             FileWriter solutionFile = new FileWriter(filename.substring(0,filename.indexOf(".txt")) + ".sln.txt", false);
             PrintWriter solutionPrinter = new PrintWriter(solutionFile);
-            solutionPrinter.println(myBoard.toString());
+            solutionPrinter.print(myBoard.toString());
             solutionPrinter.close();
             solutionFile.close();
 

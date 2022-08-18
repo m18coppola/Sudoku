@@ -41,7 +41,7 @@ public class Boardstate {
         int numberCount_row[] = new int[10];
         int numberCount_col[] = new int[10];
         int numberCount_sqr[] = new int[10];
-        int i, j, k;
+        int i, j, k, l;
 
         // check rows/cols for errors
         for (i = 0; i < 9; i++) {
@@ -63,16 +63,11 @@ public class Boardstate {
         // check squares for errors
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 3; j++) {
-                numberCount_sqr[getCell(0 + (i * 3),0 + (j * 3))]++;
-                numberCount_sqr[getCell(0 + (i * 3),1 + (j * 3))]++;
-                numberCount_sqr[getCell(0 + (i * 3),2 + (j * 3))]++;
-                numberCount_sqr[getCell(1 + (i * 3),0 + (j * 3))]++;
-                numberCount_sqr[getCell(1 + (i * 3),1 + (j * 3))]++;
-                numberCount_sqr[getCell(1 + (i * 3),2 + (j * 3))]++;
-                numberCount_sqr[getCell(2 + (i * 3),0 + (j * 3))]++;
-                numberCount_sqr[getCell(2 + (i * 3),1 + (j * 3))]++;
-                numberCount_sqr[getCell(2 + (i * 3),2 + (j * 3))]++;
-
+                for (k = 0; k < 3; k++) {
+                    for (l = 0; l < 3; l++){
+                        numberCount_sqr[getCell(k + (i * 3),l + (j * 3))]++;
+                    }
+                }
                 for (k = 1; k <= 9; k++) {
                     if (numberCount_sqr[k] > 1) {
                         return false;
