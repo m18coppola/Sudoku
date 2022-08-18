@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.lang.IllegalArgumentException;
 
@@ -19,6 +21,10 @@ class SudokuSolver {
         }
         filename = args[0];
 
+        if (filename.indexOf(".txt") != filename.length() - 4) {
+            throw new IllegalArgumentException("Invalid file extention. Must use text file ending in .txt");
+        }
+
         /* Read puzzle input */
         try (Reader puzzleFile = new FileReader(filename);
              BufferedReader puzzleReader = new BufferedReader(puzzleFile)) {
@@ -36,14 +42,23 @@ class SudokuSolver {
                 }
                 input = puzzleReader.read();
             }
+            puzzleReader.close();
+            puzzleFile.close();
 
             Boardstate myBoard = new Boardstate(cells);
             System.out.println();
             myBoard.printBoard();
             System.out.println();
-            System.out.println(myBoard.isValid());
-            puzzleReader.close();
-            puzzleFile.close();
+            myBoard.Solve();
+            myBoard.printBoard();
+            System.out.println();
+
+            FileWriter solutionFile = new FileWriter(filename.substring(0,filename.indexOf(".txt")) + ".sln.txt", false);
+            PrintWriter solutionPrinter = new PrintWriter(solutionFile);
+            solutionPrinter.println(myBoard.toString());
+            solutionPrinter.close();
+            solutionFile.close();
+
         }
         
     }

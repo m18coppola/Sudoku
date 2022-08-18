@@ -1,13 +1,19 @@
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Stack;
 
 public class Boardstate {
     private final static int BOARDSIZE = 9 * 9;
+    private Set<Integer> clues;
 
     //opted in for 1d array, 2d arrays are non-contiguous by jvm spec ( https://docs.oracle.com/javase/specs/jls/se18/html/jls-10.html )
     private int board[];
 
     public Boardstate(char input[]) {
         int i;
+
+        clues = new HashSet<Integer>();
 
         /* populate board with clues, 0 for empty spaces */
         this.board = new int[BOARDSIZE];
@@ -16,6 +22,7 @@ public class Boardstate {
                 board[i] = 0;
             } else {
                 board[i] = Character.getNumericValue(input[i]);
+                clues.add(i);
             }
         }
     }
@@ -89,4 +96,49 @@ public class Boardstate {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder boardtext = new StringBuilder();
+        for (int i = 0; i < BOARDSIZE; i++) {
+            if (board[i] == 0) {
+                boardtext.append("X");
+            } else {
+                boardtext.append(board[i]);
+            }
+            if ((i+1)%9 == 0) {
+                boardtext.append("\n");
+            }
+        }
+        return boardtext.toString();
+    }
+
+    public boolean Solve() {
+
+        if (!isValid()) {
+            System.err.println("Puzzle is unsolvable!");
+            return false;
+        } 
+
+        int i = 0;
+        while(i < BOARDSIZE) {
+            // cell has clue, skip
+            if (clues.contains(i)) {
+                i++;
+            } else if (board[i] < 9){
+                board[i]++;
+                if (isValid()) {
+                    i++;
+                }
+            } else {
+                board[i] = 0;
+                do {
+                    i--;
+                } while (clues.contains(i));
+            }
+        }
+        return true;
+        
+    }
+
 }
