@@ -1,8 +1,4 @@
-import java.util.Scanner;
 import java.io.BufferedReader;
-import java.io.Closeable;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -29,11 +25,23 @@ class SudokuSolver {
 
             int input;
             input = puzzleReader.read();
+            char cells[] = new char[9 * 9];
+            int i;
+
+            i = 0;
             while (input != -1) {
-                if (!Character.isWhitespace((char)input))
-                System.out.println((char)input);
+                if (!Character.isWhitespace((char)input)) {
+                    cells[i] = (char)input;
+                    i++;
+                }
                 input = puzzleReader.read();
             }
+
+            Boardstate myBoard = new Boardstate(cells);
+            System.out.println();
+            myBoard.printBoard();
+            System.out.println();
+            System.out.println(myBoard.isValid());
             puzzleReader.close();
             puzzleFile.close();
         }
