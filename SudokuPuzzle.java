@@ -4,9 +4,17 @@ class SudokuPuzzle {
 
     public int dimension, xDivisions, yDivisions;
     public int cellCount;
+
+    public int getDimension() {
+        return this.dimension;
+    }
+
+    public int getCellCount() {
+        return this.cellCount;
+    }
+    
     public int board[];
     public boolean isClue[];
-
 
     public SudokuPuzzle(int dimension, int xDivisions, int yDivisions) {
         if (xDivisions * yDivisions != dimension) {
@@ -70,6 +78,16 @@ class SudokuPuzzle {
             throw new IllegalArgumentException("Cell contains a clue.");
         }
         board[index] = value;
+    }
+
+    public void incrementCell(int index) {
+        if (index >= cellCount) {
+            throw new IllegalArgumentException("Index out of bounds.");
+        }
+        if (isClue[index]) {
+            throw new IllegalArgumentException("Cell contains a clue.");
+        }
+        board[index]++;
     }
 
     public int getCell(int index) {

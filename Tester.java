@@ -5,6 +5,9 @@ public class Tester {
         System.out.println("Creating Puzzle...");
         SudokuPuzzle puzzle = SudokuPuzzleFactory.Load9by9("puzzle1.txt");
         System.out.println(puzzle.toString());
+        System.out.println("Solving Puzzle...");
+        SudokuSolver.Solve(puzzle);
+        System.out.println(puzzle.toString());
 
         System.out.println("Trying to create invalid puzzle...");
         puzzle = SudokuPuzzleFactory.Load9by9("puzzle1bad.txt");

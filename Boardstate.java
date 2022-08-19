@@ -1,7 +1,5 @@
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Stack;
 
 public class Boardstate {
     private final static int BOARDSIZE = 9 * 9;
