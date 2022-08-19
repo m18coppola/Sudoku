@@ -19,6 +19,8 @@ public class SudokuSolver {
         cellCount = puzzle.getCellCount();
         dimension = puzzle.getDimension();
         solvable = true;
+
+        /* check if initial puzzle is solvable */
         for (i = 0; i < cellCount && solvable; i++) {
             /* If a clue is invalid, the puzzle is unsolvable */
             if (puzzle.isClue(i) && !puzzle.isValid(i)) {
@@ -27,6 +29,7 @@ public class SudokuSolver {
             }
         }
 
+        /* start solving */
         if (solvable) {
             i = 0;
             while (i < cellCount) {
