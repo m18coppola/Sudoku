@@ -14,30 +14,40 @@ public class SudokuSolver {
         int i;
         int cellCount;
         int dimension;
+        boolean solvable;
 
         cellCount = puzzle.getCellCount();
         dimension = puzzle.getDimension();
-        for (i = 0; i < cellCount; i++) {
+        solvable = true;
+        for (i = 0; i < cellCount && solvable == true; i++) {
+            /* If a clue is invalid, the puzzle is unsolvable */
             if (puzzle.isClue(i) && !puzzle.isValid(i)) {
                 System.err.println("Puzzle is unsolvable.");
-            } else {
-                i = 0;
-                while (i < cellCount) {
-                    if (puzzle.isClue(i)) {
+                solvable = false;
+            }
+        }
+
+        if (solvable) {
+            i = 0;
+            while (i < cellCount) {
+                /* Skip clues */
+                if (puzzle.isClue(i)) {
+                    i++;
+                } else if (puzzle.getCell(i) < dimension) {
+                    /* try a new guess, go to next cell if valid*/
+                    puzzle.incrementCell(i);
+                    if (puzzle.isValid(i)) {
                         i++;
-                    } else if (puzzle.getCell(i) < dimension) {
-                        puzzle.incrementCell(i);
-                        if (puzzle.isValid(i)) {
-                            i++;
-                        }
-                    } else {
-                        puzzle.setCell(i, 0);
-                        do {
-                            i--;
-                        } while (puzzle.isClue(i));
                     }
+                } else {
+                    /* search tree branch terminated early, backtrace to last non-clue cell */
+                    puzzle.setCell(i, 0);
+                    do {
+                        i--;
+                    } while (puzzle.isClue(i));
                 }
             }
         }
     }
+    
 }

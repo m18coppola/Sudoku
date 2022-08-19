@@ -216,6 +216,10 @@ public class SudokuPuzzle {
         int numberCount_sqr[] = new int[dimension + 1];
         int i, j;
 
+        /* 
+         * Count how many of each number is in given row and column
+         * Failiure when there are duplicates
+         */
         for (i = 0; i < dimension; i++) {
             numberCount_row[getCell(row, i)]++;
             numberCount_col[getCell(i, column)]++;
@@ -225,6 +229,7 @@ public class SudokuPuzzle {
                 return false;
         }
         
+        /* repeat process for given square (supercell) */
         int superCellRow = row/yDivisions;
         int superCellCol = row/xDivisions;
         int superCellHeight = dimension/yDivisions;
