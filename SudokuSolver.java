@@ -1,5 +1,5 @@
 class SudokuSolver {
-    public static void Solve(SudokuPuzzle puzzle) {
+    public static void solve(SudokuPuzzle puzzle) {
         int i;
         int cellCount;
         int dimension;

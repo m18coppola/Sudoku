@@ -6,10 +6,16 @@ public class Tester {
         SudokuPuzzle puzzle = SudokuPuzzleFactory.Load9by9("puzzle1.txt");
         System.out.println(puzzle.toString());
         System.out.println("Solving Puzzle...");
-        SudokuSolver.Solve(puzzle);
+        SudokuSolver.solve(puzzle);
         System.out.println(puzzle.toString());
 
-        System.out.println("Trying to create invalid puzzle...");
-        puzzle = SudokuPuzzleFactory.Load9by9("puzzle1bad.txt");
+        for (int i = 1; i <= 5; i++) {
+            puzzle = SudokuPuzzleFactory.Load9by9("puzzle"+i+".txt");
+            System.out.println(puzzle.toString());
+            System.out.println("Solving Puzzle...");
+            SudokuSolver.solve(puzzle);
+            System.out.println(puzzle.toString());
+            Main.printFile(puzzle, "puzzle" + i + ".txt");
+        }
     }
 }
