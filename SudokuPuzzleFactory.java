@@ -3,7 +3,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-class SudokuPuzzleFactory {
+/**
+ * Factory Class for SudokuPuzzle
+ */
+public class SudokuPuzzleFactory {
+    /**
+     * Takes a text file containing a 9x9 sudoku puzzle and
+     * loads it into a SudokuPuzzle object
+     * 
+     * @param filename .txt file containing 9x9 puzzle
+     * @return SudokuPuzzle object populated with clues from text file
+     * @throws IOException
+     */
     public static SudokuPuzzle Load9by9(String filename) throws IOException {
         SudokuPuzzle puzzle = new SudokuPuzzle(9, 3, 3);
 

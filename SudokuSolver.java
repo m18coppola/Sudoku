@@ -1,4 +1,15 @@
-class SudokuSolver {
+/**
+ * Helper class containing a backtracking method of solving
+ * sudoku puzzles.
+ */
+public class SudokuSolver {
+    /**
+     * Takes a SudokuPuzzle object and populates it
+     * with the correct answers. leaves puzzle unchanged if
+     * it is unsolvable.
+     * 
+     * @param puzzle SudokuPuzzle object to be populated with solution
+     */
     public static void solve(SudokuPuzzle puzzle) {
         int i;
         int cellCount;
