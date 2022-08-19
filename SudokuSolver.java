@@ -19,7 +19,7 @@ public class SudokuSolver {
         cellCount = puzzle.getCellCount();
         dimension = puzzle.getDimension();
         solvable = true;
-        for (i = 0; i < cellCount && solvable == true; i++) {
+        for (i = 0; i < cellCount && solvable; i++) {
             /* If a clue is invalid, the puzzle is unsolvable */
             if (puzzle.isClue(i) && !puzzle.isValid(i)) {
                 System.err.println("Puzzle is unsolvable.");
